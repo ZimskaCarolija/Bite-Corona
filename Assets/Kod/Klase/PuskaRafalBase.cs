@@ -12,6 +12,7 @@ public class PuskaRafalBase : MonoBehaviour
     public GameObject Metak;
     public bool MozePucanje = true;//dali mzoe da puca;;//da nije pod neki mefektom
     public bool SpremnoPucanje = true;//dali moze da puca ovo se odnosi na fire rate dali je spremno pucanje
+    public float JacinaMetka;// koliko je jak metak
     void Start()
     {
         
@@ -35,7 +36,7 @@ public class PuskaRafalBase : MonoBehaviour
     {
         GameObject pom = Instantiate(Metak);//soawnuje metak
         pom.transform.position = poziciajSpawnovanjeMetka.transform.position;//postavlja poziciju metku na mesto spawnivane metka
-        pom.GetComponent<Rigidbody2D>().velocity = transform.right * 15;
+        pom.GetComponent<Rigidbody2D>().velocity = transform.right * JacinaMetka;
 
     }
     public void PUstiEfekat()//pusta efekat

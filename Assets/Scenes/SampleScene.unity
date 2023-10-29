@@ -972,6 +972,7 @@ MonoBehaviour:
   Metak: {fileID: 1807023662}
   MozePucanje: 1
   SpremnoPucanje: 1
+  JacinaMetka: 17
 --- !u!1 &845678778
 GameObject:
   m_ObjectHideFlags: 0
