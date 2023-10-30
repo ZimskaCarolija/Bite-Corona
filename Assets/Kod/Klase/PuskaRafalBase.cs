@@ -9,11 +9,11 @@ public class PuskaRafalBase : MonoBehaviour
     public float Range;//koliki je rang puske koliko vreman metka leti
     public GameObject Efekat;//efekat za pucanje
     public Transform poziciajSpawnovanjeMetka;//mesto gde se spavuje metak
-    public GameObject Metak;
     public bool MozePucanje = true;//dali mzoe da puca;;//da nije pod neki mefektom
     public bool SpremnoPucanje = true;//dali moze da puca ovo se odnosi na fire rate dali je spremno pucanje
     public float JacinaMetka;// koliko je jak metak
     public PuskaMenadzer puskaM;//manadzer puske
+    public float MnozilacDMG;
     void Start()
     {
         
@@ -35,9 +35,10 @@ public class PuskaRafalBase : MonoBehaviour
     }
     public void Pucanj_Fja()//ovde se spawnuje metak i idodaje mu se sila
     {
-        GameObject pom = Instantiate(Metak);//soawnuje metak
+        GameObject pom = Instantiate(puskaM.EquipovanMetak);//soawnuje metak
         pom.transform.position = poziciajSpawnovanjeMetka.transform.position;//postavlja poziciju metku na mesto spawnivane metka
         pom.GetComponent<Rigidbody2D>().velocity = transform.right * JacinaMetka;
+        pom.GetComponent<Metak>().Podesi(Range, MnozilacDMG);
 
     }
     public void PUstiEfekat()//pusta efekat

@@ -11,6 +11,7 @@ public class PuskaMenadzer : MonoBehaviour
     public GameObject PUskaRoditelj;//ovde se dodaje  puska i ovo je roditelj puske to jest ovaj bojekat
     public PuskaK equipovana;//puska koja je trenutno equipovana
     public bool MozePucanje = true;//dali mzoe da s epuca ovo se koristi zbog ui -a ja da ne bi puska mogal da puca kada je u uui
+    public GameObject EquipovanMetak;
     //UI
     public Image uiZaPusku;//ovde ce se nalazi ti prikaz equpiovane puske van menia u uigri
     public Transform InventoryContentPUske;//ovde ce se spawnovati dugmici
@@ -98,7 +99,6 @@ public class PuskaMenadzer : MonoBehaviour
                 pom.transform.position = PUskaRoditelj.transform.position;//postavlja poziciju puske na roditeljki objekat
                 pom.transform.parent = PUskaRoditelj.transform;//postavalja roditelja puske koja se sad spavnibvala
                 pom.GetComponent<PuskaRafalBase>().SpremnoPucanje = true;//postavja da moze da s epuska puca  i puskarafalbase je glavna klasa za puske iz koje ostale ansledjuju
-                pom.GetComponent<PuskaRafalBase>().Metak = metakBase;//pstavlja metak ovo je smao trenutno posle ce drukcije biti
                 pom.GetComponent<PuskaRafalBase>().puskaM = this;//dodavanj puske menadzera puski
                 return;
             }

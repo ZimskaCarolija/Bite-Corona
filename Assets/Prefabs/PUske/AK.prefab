@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 391279737083148765}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.98, y: 0.71, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 4.34, y: 0.84, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8682312214275522024}
@@ -222,14 +222,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireRate: 0.4
   TrajanjeEfekta: 0.22
-  Range: 2
+  Range: 0.6
   Efekat: {fileID: 391279737083148765}
   poziciajSpawnovanjeMetka: {fileID: 1959238312570429769}
-  Metak: {fileID: 0}
   MozePucanje: 1
   SpremnoPucanje: 1
   JacinaMetka: 17
   puskaM: {fileID: 0}
+  MnozilacDMG: 1.25
 --- !u!1 &8966919869925527234
 GameObject:
   m_ObjectHideFlags: 0

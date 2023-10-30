@@ -148,13 +148,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireRate: 0.5
   TrajanjeEfekta: 0.25
-  Range: 2
+  Range: 0.6
   Efekat: {fileID: 5791913619573711339}
   poziciajSpawnovanjeMetka: {fileID: 3566152458595799737}
-  Metak: {fileID: 0}
   MozePucanje: 1
   SpremnoPucanje: 1
-  JacinaMetka: 25
+  JacinaMetka: 35
+  puskaM: {fileID: 0}
+  MnozilacDMG: 4
 --- !u!95 &6948599008773872830
 Animator:
   serializedVersion: 5
@@ -202,8 +203,8 @@ Transform:
   m_GameObject: {fileID: 5791913619573711339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.46, y: 0.3, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 5.13, y: 0.46, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2494011777182203081}
