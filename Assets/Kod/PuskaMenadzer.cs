@@ -98,6 +98,7 @@ public class PuskaMenadzer : MonoBehaviour
                 GameObject pom = Instantiate(equipovana.objekat);//spawnuje pusku
                 pom.transform.position = PUskaRoditelj.transform.position;//postavlja poziciju puske na roditeljki objekat
                 pom.transform.parent = PUskaRoditelj.transform;//postavalja roditelja puske koja se sad spavnibvala
+               
                 pom.GetComponent<PuskaRafalBase>().SpremnoPucanje = true;//postavja da moze da s epuska puca  i puskarafalbase je glavna klasa za puske iz koje ostale ansledjuju
                 pom.GetComponent<PuskaRafalBase>().puskaM = this;//dodavanj puske menadzera puski
                 return;

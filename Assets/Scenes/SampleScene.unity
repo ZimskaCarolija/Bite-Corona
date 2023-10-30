@@ -298,7 +298,7 @@ MonoBehaviour:
   PUskaRoditelj: {fileID: 0}
   equipovana: {fileID: 0}
   MozePucanje: 1
-  EquipovanMetak: {fileID: 4819206445313833668, guid: 1a652783cd96a6a4c96c9847e8d0edb4, type: 3}
+  EquipovanMetak: {fileID: 7364039124860964369, guid: 14c2f3e42fd55734da624e328a7b758d, type: 3}
   uiZaPusku: {fileID: 88775478}
   InventoryContentPUske: {fileID: 1926451925}
   dugmeInventoryPrefabPuske: {fileID: 2689452016438796880, guid: 527789d9cf7767a4ebc6bd870973d6a8, type: 3}
