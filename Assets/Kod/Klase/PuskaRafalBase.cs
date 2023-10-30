@@ -13,6 +13,7 @@ public class PuskaRafalBase : MonoBehaviour
     public bool MozePucanje = true;//dali mzoe da puca;;//da nije pod neki mefektom
     public bool SpremnoPucanje = true;//dali moze da puca ovo se odnosi na fire rate dali je spremno pucanje
     public float JacinaMetka;// koliko je jak metak
+    public PuskaMenadzer puskaM;//manadzer puske
     void Start()
     {
         
@@ -21,7 +22,7 @@ public class PuskaRafalBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(MozePucanje)
+        if(MozePucanje && puskaM.MozePucanje)
         {
             if(SpremnoPucanje && Input.GetMouseButton(0))
             {

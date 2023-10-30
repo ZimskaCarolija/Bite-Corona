@@ -10,6 +10,7 @@ public class PuskaMenadzer : MonoBehaviour
     public List<PuskaK>MojePuske = new List<PuskaK> ();//lista pusaka kojeje igrac otkljucao inventori
     public GameObject PUskaRoditelj;//ovde se dodaje  puska i ovo je roditelj puske to jest ovaj bojekat
     public PuskaK equipovana;//puska koja je trenutno equipovana
+    public bool MozePucanje = true;//dali mzoe da s epuca ovo se koristi zbog ui -a ja da ne bi puska mogal da puca kada je u uui
     //UI
     public Image uiZaPusku;//ovde ce se nalazi ti prikaz equpiovane puske van menia u uigri
     public Transform InventoryContentPUske;//ovde ce se spawnovati dugmici
@@ -98,22 +99,23 @@ public class PuskaMenadzer : MonoBehaviour
                 pom.transform.parent = PUskaRoditelj.transform;//postavalja roditelja puske koja se sad spavnibvala
                 pom.GetComponent<PuskaRafalBase>().SpremnoPucanje = true;//postavja da moze da s epuska puca  i puskarafalbase je glavna klasa za puske iz koje ostale ansledjuju
                 pom.GetComponent<PuskaRafalBase>().Metak = metakBase;//pstavlja metak ovo je smao trenutno posle ce drukcije biti
+                pom.GetComponent<PuskaRafalBase>().puskaM = this;//dodavanj puske menadzera puski
                 return;
             }
         }
     }
-    public void InventoryUpdejtPUske()
+    public void InventoryUpdejtPUske()//updejtuje inv zsa puskama koje je igrac otkljucao
     {   
 
-        for(int i=0;i<InventoryContentPUske.transform.childCount;i++)
+        for(int i=0;i<InventoryContentPUske.transform.childCount;i++)//ixbirse sve sdtara u uinvent0orij uda bi spawnolo nove
         {
             Destroy(InventoryContentPUske.transform.GetChild(i).gameObject);
         }
-        for(int i=0;i<MojePuske.Count;i++)
+        for(int i=0;i<MojePuske.Count;i++)//prilazi kroz otkljcane psuke
         {
 
-            GameObject novoDugmeInv = Instantiate(dugmeInventoryPrefabPuske, InventoryContentPUske);
-            novoDugmeInv.GetComponent<DugmeInvPUska>().Podesi(MojePuske[i].id, MojePuske[i].slika,this);
+            GameObject novoDugmeInv = Instantiate(dugmeInventoryPrefabPuske, InventoryContentPUske);//spanjije dogme
+            novoDugmeInv.GetComponent<DugmeInvPUska>().Podesi(MojePuske[i].id, MojePuske[i].slika,this);//posat6vlja m uslik u iisotale stvari
         }
     }
 }

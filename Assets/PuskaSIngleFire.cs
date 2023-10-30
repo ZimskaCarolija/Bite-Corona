@@ -14,7 +14,7 @@ public class PuskaSIngleFire : PuskaRafalBase
     void Update()
     {
 
-        if (MozePucanje)
+        if (MozePucanje && puskaM.MozePucanje)
         {
             if (SpremnoPucanje && Input.GetMouseButtonDown(0))
             {
