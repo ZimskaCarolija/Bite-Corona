@@ -11,23 +11,39 @@ public class PuskaMenadzer : MonoBehaviour
     public GameObject PUskaRoditelj;//ovde se dodaje  puska i ovo je roditelj puske to jest ovaj bojekat
     public PuskaK equipovana;//puska koja je trenutno equipovana
     public bool MozePucanje = true;//dali mzoe da s epuca ovo se koristi zbog ui -a ja da ne bi puska mogal da puca kada je u uui
-    public GameObject EquipovanMetak;
+
+    public MetakK []metkoviEquipovani = new MetakK[3];
+    public List<MetakK> sviMetkovi = new List<MetakK>();
+    public List<MetakK>OtkljucaniMetkovi = new List<MetakK>();//metkovi koje je igrac otkljucao
+    public int INdexEquipovanog = 0;//po ovome ornalzi metak koji je quipovan
     //UI
+    [Header("UI")]
     public Image uiZaPusku;//ovde ce se nalazi ti prikaz equpiovane puske van menia u uigri
     public Transform InventoryContentPUske;//ovde ce se spawnovati dugmici
     public GameObject dugmeInventoryPrefabPuske;
+    public Image MetakINdexSlika;//slika metka koji se trenutno koristi to ejs tmest ogde s epsrite stavja
+    public Text MetakIndexKolicinaT;//tekst gde s epsie koliko metkova ima 
     //slike pusaka za ui
+    [Header("SLike puske UI")]
     public Sprite AkSlika;
     public Sprite RevolverSlika;
 
     //objekti pusaka
+    [Header("Objekti PUske")]
     public GameObject AkObj;
     public GameObject RevolverObj;
 
 
     //Metkovi
+    [Header("Mekobi Obj")]
     public GameObject metakBase;
-
+    public GameObject metakPierce;
+    public GameObject metakFire;
+    //Metkovi Slike
+    [Header("metkovi Slike")]
+    public Sprite metakObvicanSlika;
+    public Sprite metakPIerceSlika;
+    public Sprite metakFireSLika;
     void Start()
     {
         PUskaRoditelj = this.gameObject;
@@ -35,14 +51,32 @@ public class PuskaMenadzer : MonoBehaviour
         OtkljucajPUska("ak");
         OtkljucajPUska("revolver");
         EquipujPUsku("ak");
+        PopuniMetkove();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        PromeniMetakIndex();
     }
+    public void PopuniMetkove()
+    {
+        MetakK obican = new MetakK(metakObvicanSlika, metakBase, "obican",50);
+        sviMetkovi.Add(obican);
+        MetakK pierce = new MetakK(metakPIerceSlika, metakPierce, "pierce",10);
+        sviMetkovi.Add(pierce);
+        MetakK vatreni = new MetakK(metakFireSLika, metakFire, "fire",10);
+        sviMetkovi.Add(vatreni);
 
+        metkoviEquipovani[0] = sviMetkovi[0];
+        metkoviEquipovani[1] = sviMetkovi[1];
+        metkoviEquipovani[2] = sviMetkovi[2];
+    }
+    public void MetakUIUpdate()
+    {
+        MetakINdexSlika.sprite = metkoviEquipovani[INdexEquipovanog].Slika;
+        MetakIndexKolicinaT.text = metkoviEquipovani[INdexEquipovanog].UzmiKOolicinu();
+    }
     public void PopuniPuske()
     {
         PuskaK reovlver = new PuskaK("revolver",RevolverObj,RevolverSlika);
@@ -69,6 +103,19 @@ public class PuskaMenadzer : MonoBehaviour
         
 
 
+    }
+    public void PromeniMetakIndex()//ovo menja index koji je od equipovanih metkova aktivan
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            if (INdexEquipovanog == metkoviEquipovani.Length-1)
+            {
+                INdexEquipovanog = 0;
+            }
+            else
+                INdexEquipovanog++;
+            MetakUIUpdate();
+        }
     }
     public bool DaLiImaPusku(string id)//pretrauzje ivnentor puske ii vraca booolean u uzavisnoti dla iima pusk usa tim id  u uinv
     {

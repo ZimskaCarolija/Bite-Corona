@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4298ebd1945f1e34d9d4668cd80226da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DMGMetka: 0
+  DMGMetka: 12
   Vatra: 0
   Otrov: 0
   Struja: 0

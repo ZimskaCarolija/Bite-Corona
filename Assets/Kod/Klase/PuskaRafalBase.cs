@@ -35,11 +35,16 @@ public class PuskaRafalBase : MonoBehaviour
     }
     public void Pucanj_Fja()//ovde se spawnuje metak i idodaje mu se sila
     {
-        GameObject pom = Instantiate(puskaM.EquipovanMetak);//soawnuje metak
-        pom.transform.position = poziciajSpawnovanjeMetka.transform.position;//postavlja poziciju metku na mesto spawnivane metka
-        pom.GetComponent<Rigidbody2D>().velocity = transform.right * JacinaMetka;
-        pom.transform.rotation = transform.rotation;
-        pom.GetComponent<Metak>().Podesi(Range, MnozilacDMG);
+        if (puskaM.metkoviEquipovani[puskaM.INdexEquipovanog].MozePucanjeKolicina(1))
+        {
+            puskaM.metkoviEquipovani[puskaM.INdexEquipovanog].SmanjiMetkove(1);
+            puskaM.MetakUIUpdate();
+            GameObject pom = Instantiate(puskaM.metkoviEquipovani[puskaM.INdexEquipovanog].MetakObj);//soawnuje metak
+            pom.transform.position = poziciajSpawnovanjeMetka.transform.position;//postavlja poziciju metku na mesto spawnivane metka
+            pom.GetComponent<Rigidbody2D>().velocity = transform.right * JacinaMetka;
+            pom.transform.rotation = transform.rotation;
+            pom.GetComponent<Metak>().Podesi(Range, MnozilacDMG);
+        }
 
     }
     public void PUstiEfekat()//pusta efekat
