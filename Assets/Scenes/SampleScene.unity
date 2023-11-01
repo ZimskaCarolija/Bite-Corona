@@ -394,9 +394,13 @@ MonoBehaviour:
   metakBase: {fileID: 4819206445313833668, guid: 1a652783cd96a6a4c96c9847e8d0edb4, type: 3}
   metakPierce: {fileID: 7364039124860964369, guid: 14c2f3e42fd55734da624e328a7b758d, type: 3}
   metakFire: {fileID: 8185957431529632936, guid: bebca1e9a6a3ab34388b066e9c7a7020, type: 3}
+  metakOtrov: {fileID: 8439913615691681304, guid: 0bcdafea3485ca246b33501dbf21f844, type: 3}
+  metakElektricni: {fileID: 3951941366864154417, guid: 6154e8eca66cce944bab809fdea47488, type: 3}
   metakObvicanSlika: {fileID: 21300000, guid: 9d02331e1df0ea34fb250639f501b5b6, type: 3}
   metakPIerceSlika: {fileID: 21300000, guid: dc12d6611b6fd5744b2a732944229075, type: 3}
   metakFireSLika: {fileID: 21300000, guid: 7493563579b193a43b81d2c23c8bc25d, type: 3}
+  metakOtrovSlika: {fileID: 21300000, guid: 13bf7d7b1ca284c4ca90542b6069bf75, type: 3}
+  metakElektricniSlika: {fileID: 21300000, guid: 65dc9cefd59f45140b061fa9f7f4a444, type: 3}
 --- !u!1 &88775476
 GameObject:
   m_ObjectHideFlags: 0

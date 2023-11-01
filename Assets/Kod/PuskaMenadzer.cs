@@ -39,11 +39,15 @@ public class PuskaMenadzer : MonoBehaviour
     public GameObject metakBase;
     public GameObject metakPierce;
     public GameObject metakFire;
+    public GameObject metakOtrov;
+    public GameObject metakElektricni;
     //Metkovi Slike
     [Header("metkovi Slike")]
     public Sprite metakObvicanSlika;
     public Sprite metakPIerceSlika;
     public Sprite metakFireSLika;
+    public Sprite metakOtrovSlika;
+    public Sprite metakElektricniSlika;
     void Start()
     {
         PUskaRoditelj = this.gameObject;
@@ -67,10 +71,13 @@ public class PuskaMenadzer : MonoBehaviour
         sviMetkovi.Add(pierce);
         MetakK vatreni = new MetakK(metakFireSLika, metakFire, "fire",10);
         sviMetkovi.Add(vatreni);
-
+        MetakK otrovni = new MetakK(metakOtrovSlika, metakOtrov, "otrov", 10);
+        sviMetkovi.Add(otrovni);
+        MetakK elektricni = new MetakK(metakElektricniSlika, metakElektricni, "elektricni", 10);
+        sviMetkovi.Add(elektricni);
         metkoviEquipovani[0] = sviMetkovi[0];
         metkoviEquipovani[1] = sviMetkovi[1];
-        metkoviEquipovani[2] = sviMetkovi[2];
+        metkoviEquipovani[2] = sviMetkovi[4];
     }
     public void MetakUIUpdate()
     {
@@ -83,6 +90,7 @@ public class PuskaMenadzer : MonoBehaviour
         SvePuske.Add(reovlver);
         PuskaK ak = new PuskaK("ak", AkObj, AkSlika);
         SvePuske.Add(ak);
+
     }
     public void OtkljucajPUska(string id)//dodaje pusku  u invcentory prima id ii po to midju nalazi pusku
     {
