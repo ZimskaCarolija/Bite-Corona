@@ -36,4 +36,8 @@ public class DMGPrenos : MonoBehaviour
     {
         this.DMG = DMGMetka * Mnozilac;
     }
+    public float UzmiDMG()
+    {
+        return this.DMG;
+    }
 }

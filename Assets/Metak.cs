@@ -12,7 +12,7 @@ public class Metak : MonoBehaviour
     public bool LifeSteal;//dal inanso ilife steal
     public float ProcenatLifeSteala;
     public GameObject Efekat;//efekat koji se spawnuje akda se unisti metak
-    
+    DMGPrenos prenos;
     void Start()
     {
        
@@ -25,7 +25,7 @@ public class Metak : MonoBehaviour
     }
     public void Podesi(float Range,float Mnozilac)//u ovoj funckiji postavlja speciifcne stvari za pusku
     {
-        DMGPrenos prenos = new DMGPrenos(DMGMetka, Vatra, Otrov, Struja, LifeSteal, ProcenatLifeSteala);//pravi objekqat z aprenos dmg
+        prenos = new DMGPrenos(DMGMetka, Vatra, Otrov, Struja, LifeSteal, ProcenatLifeSteala);//pravi objekqat z aprenos dmg
          prenos.IzracunaDMG(Mnozilac);//izracunava ukupan dmg po puski
         StartCoroutine(Unisti_Vrme(Range));//zoive vremsnk u funkih koja unistava objekat po rang4eu
     }
@@ -39,5 +39,14 @@ public class Metak : MonoBehaviour
          GameObject pom = Instantiate(Efekat);
         pom.transform.position = this.transform.position;
         Destroy(gameObject);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Neprijatelj")
+        {
+            collision.gameObject.GetComponent<NeprijateljHP>().Udari(prenos);
+            Unisit_fja();
+        }
+
     }
 }
