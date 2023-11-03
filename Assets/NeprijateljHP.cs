@@ -110,13 +110,14 @@ public class NeprijateljHP : MonoBehaviour
         }
 
         if (TenutniHP <= 0)
-
             Izgubi();
     }
     public void UdariCistBroj(float Broj)//ovde s e dondaj uefekti
     {
         TenutniHP -= Broj;
         UpdajtujHPBar();
+        if (TenutniHP <= 0)
+            Izgubi();
     }
     
 
