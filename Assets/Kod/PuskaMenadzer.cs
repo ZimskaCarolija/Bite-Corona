@@ -76,8 +76,8 @@ public class PuskaMenadzer : MonoBehaviour
         MetakK elektricni = new MetakK(metakElektricniSlika, metakElektricni, "elektricni", 10);
         sviMetkovi.Add(elektricni);
         metkoviEquipovani[0] = sviMetkovi[0];
-        metkoviEquipovani[1] = sviMetkovi[1];
-        metkoviEquipovani[2] = sviMetkovi[4];
+        metkoviEquipovani[1] = sviMetkovi[2];
+        metkoviEquipovani[2] = sviMetkovi[3];
     }
     public void MetakUIUpdate()
     {

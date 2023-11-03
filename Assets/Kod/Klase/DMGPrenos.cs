@@ -22,7 +22,7 @@ public class DMGPrenos : MonoBehaviour
         this.LifeSteal = LifeSteal;
         this.ProcenatLifeSteala = ProcenatLifeSteala;
     }
-    public DMGPrenos()
+   /* public DMGPrenos()
     {
         this.DMG = 0;
         this.DMGMetka = 0;
@@ -31,7 +31,7 @@ public class DMGPrenos : MonoBehaviour
         this.Struja = false;
         this.LifeSteal = false;
         this.ProcenatLifeSteala = 0;
-    }
+    }*/
     public void IzracunaDMG(float Mnozilac)//ova funckija izracunava uku0pan dmg metak  
     {
         this.DMG = DMGMetka * Mnozilac;

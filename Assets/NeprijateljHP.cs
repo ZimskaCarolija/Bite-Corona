@@ -24,6 +24,7 @@ public class NeprijateljHP : MonoBehaviour
     public float TrenuBarStruja;
     public float TrajanjeStruje;//koliko dugo traje efekat struje
     public float DoKrajaStruje;//koliko je vrmena ostalo dok s ene zaveis trajanje struje
+    public float StrujaDMG;//koliko kad s enelektrise struja nanso i dmg
 
     [Header("Otrov")]
     public bool Otrova = false;//dal ije torovan
@@ -36,6 +37,10 @@ public class NeprijateljHP : MonoBehaviour
     public float minMagnitude = 1f; // Minimalna duzina vektora
     public float maxMagnitude = 5f;//ovo i iono pre ovoga je za ranodm generisanje vectora 
     public ParticleSystem KrvPart;
+    public GameObject VatraEf;
+    public GameObject OtrovEf;
+    public GameObject StrujaEf;
+    public float POmDoSekunde;//pomocna
     void Start()
     {
         
@@ -44,10 +49,44 @@ public class NeprijateljHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        PrimeniEfekti();
+    }
+    public void PrimeniEfekti()// u ovoj funckije se desava sve vezano za primenu efekata
+    {
+        POmDoSekunde += Time.deltaTime;
+        if (Zapaljne)
+        {
+            if (POmDoSekunde > 1)
+            {
+                UdariCistBroj(VatraDMG);
+            }
+            DoKarajZapali += Time.deltaTime;
+            if (DoKarajZapali >= VremeZapali)
+            {
+                UgasiVatru();
+            }
+        }
+        if (Otrova)
+        {
+            if (POmDoSekunde > 1)
+            {
+                UdariCistBroj(OtrovDMG);
+            }
+        }
+        if (PodStrujom)
+        {
+            DoKrajaStruje += Time.deltaTime;
+            if (DoKrajaStruje >= TrajanjeStruje)
+            {
+                krajStruje();
+            }
+        }
+        if (POmDoSekunde > 1)
+            POmDoSekunde = 0;
     }
     public void Udari(DMGPrenos prenos)
     {
+        
         TenutniHP -= prenos.UzmiDMG();
         UpdajtujHPBar();
         KrvPart.Play();
@@ -69,6 +108,7 @@ public class NeprijateljHP : MonoBehaviour
             if (TrenutniBarOtrov >= OtrovBarMax)
                 Otruj();
         }
+
         if (TenutniHP <= 0)
 
             Izgubi();
@@ -86,17 +126,35 @@ public class NeprijateljHP : MonoBehaviour
         TrenutniVatraBar = 0;
         Zapaljne = true;
         DoKarajZapali = 0;
+        VatraEf.SetActive(true);
+    }
+    public void UgasiVatru()
+    {
+        TrenutniVatraBar = 0;
+        Zapaljne = false;
+        DoKarajZapali = 0;
+        VatraEf.SetActive(false) ;
+    }
+    public void krajStruje()
+    {
+        PodStrujom = false;
+        DoKrajaStruje = 0;
+        TrenuBarStruja = 0;
+        StrujaEf.SetActive(false);
     }
     public void Otruj()//ova funkcija podesava oko otrova stvari
     {
         TrenutniBarOtrov = 0;
         Otrova = true;
+        OtrovEf.SetActive(true);
     }
     public void StrujaEfekat()//ova funckija obavlja stavri oko davanja efekta struje
     {
         PodStrujom = true;
         DoKrajaStruje = 0;
         TrenuBarStruja = 0;
+        StrujaEf.SetActive(true);
+        UdariCistBroj(StrujaDMG);
     }
     public void Izgubi()//ova funkcija se desava kadatreutno hp dodje do 0
     {
