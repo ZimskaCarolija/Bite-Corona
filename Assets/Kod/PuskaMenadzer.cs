@@ -81,18 +81,7 @@ public class PuskaMenadzer : MonoBehaviour
         MetakK elektricni = new MetakK(metakElektricniSlika, metakElektricni, "elektricni", 10);
         sviMetkovi.Add(elektricni);
 
-        DodajMetak("elektricni", 10);
-        DodajMetak("otrov", 10);
-       EquipujMetak("otrov");
-       EquipujMetak("otrov");
-        EquipujMetak("elektricni");
-        DodajMetak("otrov", 50);
-       DodajMetak("otrov", 50);
-       DodajMetak("elektricni", 50);
-        DodajMetak("fire", 50);
-        DodajMetak("pierce", 50);
-        DodajMetak("obican", 150);
-        UpdejtujUIMetkoviInv();
+     
     }
     public void MetakUIUpdate()
     {
@@ -180,6 +169,7 @@ public class PuskaMenadzer : MonoBehaviour
                 if (OtkljucaniMetkovi[i].Id == id)
                 {
                     OtkljucaniMetkovi[i].PovecajBrojMetkova(kolicina);
+                MetakUIUpdate();
                 return;
                 }
             }
@@ -200,6 +190,7 @@ public class PuskaMenadzer : MonoBehaviour
                     Debug.Log("Najdne u usvi mmetkovima " + id);
                 sviMetkovi[i].POdesiKolicinu(kolicina);
                      OtkljucaniMetkovi.Add(sviMetkovi[i]);
+                MetakUIUpdate();
                 return;
                 }
             }
@@ -279,6 +270,11 @@ public class PuskaMenadzer : MonoBehaviour
 
             GameObject novoDugmeInv = Instantiate(metkovidugmePrefab, metkoviInventoryCOncent);//spanjije dogme
             novoDugmeInv.GetComponent<MetakInventory>().Postavi(OtkljucaniMetkovi[i].Slika, OtkljucaniMetkovi[i].UzmiKOolicinu(), OtkljucaniMetkovi[i].Id, this);//posat6vlja m uslik u iisotale stvari
+        }
+        for(int i = 0;i<metkoviEquipovani.Length;i++)
+        {
+            if (metkoviEquipovani[i] != null)
+                MetkoviUIDeEquip[i].Postavi(metkoviEquipovani[i].Slika, metkoviEquipovani[i].UzmiKOolicinu());
         }
     }
 }

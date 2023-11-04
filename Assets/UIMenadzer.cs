@@ -10,6 +10,7 @@ public class UIMenadzer : MonoBehaviour
     public PuskaMenadzer puskaM;
     public GameObject PUskeMeni;
     public GameObject MetkoivMeni;
+
     void Start()
     {
         
@@ -31,6 +32,7 @@ public class UIMenadzer : MonoBehaviour
                 Meni.SetActive(true);
                 MeniAktivan=true;
                 puskaM.MozePucanje =false;
+                puskaM.UpdejtujUIMetkoviInv();
             }
 
         }
@@ -44,5 +46,6 @@ public class UIMenadzer : MonoBehaviour
     {
         PUskeMeni.SetActive(false);
         MetkoivMeni.SetActive(true);
+        
     }
 }
