@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,11 +25,13 @@ public class PuskaMenadzer : MonoBehaviour
     public GameObject dugmeInventoryPrefabPuske;
     public Image MetakINdexSlika;//slika metka koji se trenutno koristi to ejs tmest ogde s epsrite stavja
     public Text MetakIndexKolicinaT;//tekst gde s epsie koliko metkova ima 
+    public GameObject metkovidugmePrefab;//prefab dugme
+    public Transform metkoviInventoryCOncent;//ovde s edugmici metkoi u uinventruj postavljaju
     //slike pusaka za ui
     [Header("SLike puske UI")]
     public Sprite AkSlika;
     public Sprite RevolverSlika;
-
+   
     //objekti pusaka
     [Header("Objekti PUske")]
     public GameObject AkObj;
@@ -75,14 +79,34 @@ public class PuskaMenadzer : MonoBehaviour
         sviMetkovi.Add(otrovni);
         MetakK elektricni = new MetakK(metakElektricniSlika, metakElektricni, "elektricni", 10);
         sviMetkovi.Add(elektricni);
-        metkoviEquipovani[0] = sviMetkovi[0];
-        metkoviEquipovani[1] = sviMetkovi[2];
-        metkoviEquipovani[2] = sviMetkovi[3];
+
+        DodajMetak("elektricni", 10);
+        DodajMetak("otrov", 10);
+       EquipujMetak("otrov");
+       EquipujMetak("otrov");
+        EquipujMetak("elektricni");
+        DodajMetak("otrov", 50);
+       DodajMetak("otrov", 50);
+       DodajMetak("elektricni", 50);
+        DodajMetak("fire", 50);
+        DodajMetak("pierce", 50);
+        DodajMetak("obican", 150);
+        UpdejtujUIMetkoviInv();
     }
     public void MetakUIUpdate()
     {
-        MetakINdexSlika.sprite = metkoviEquipovani[INdexEquipovanog].Slika;
-        MetakIndexKolicinaT.text = metkoviEquipovani[INdexEquipovanog].UzmiKOolicinu();
+        try
+        {
+            Debug.Log("Metak ui " + metkoviEquipovani[INdexEquipovanog].Id);
+            MetakINdexSlika.sprite = metkoviEquipovani[INdexEquipovanog].Slika;
+            MetakIndexKolicinaT.text = metkoviEquipovani[INdexEquipovanog].UzmiKOolicinu();
+
+        }
+        catch
+        {
+            MetakINdexSlika.sprite = null;
+            MetakIndexKolicinaT.text = "";
+        }
     }
     public void PopuniPuske()
     {
@@ -110,6 +134,72 @@ public class PuskaMenadzer : MonoBehaviour
         }
         
 
+
+    }
+    public void DeEquipujMetak(int i)//izbacuje metak iz equipa
+    {
+        try
+        {
+            OtkljucaniMetkovi.Add(metkoviEquipovani[i]);
+            metkoviEquipovani[i] = null;
+        }
+        catch { };
+    }
+    public void EquipujMetak(string id)//dodaje metak iz otkljucanih  u equipovane
+    {
+        for(int i=0;i<OtkljucaniMetkovi.Count;i++)//prlazi kroz sve otkljucane emtkove i ikad nadje tka  metak
+        {
+            if (OtkljucaniMetkovi[i].Id ==  id)
+            {
+                for(int j=0;j<metkoviEquipovani.Length;j++)//prlazi kroz equipova dok ne nadje prazno mesto i i tu ubaci otkljucan metak
+                {
+                    if (metkoviEquipovani[j] == null)
+                    {
+                        try
+                        {
+                            metkoviEquipovani[j] = OtkljucaniMetkovi[i];
+                            Debug.LogWarning("metka na J " + j + " je " + metkoviEquipovani[j].Id);
+                            OtkljucaniMetkovi.Remove(OtkljucaniMetkovi[i]);
+                            UpdejtujUIMetkoviInv();
+                            return;
+                        }
+                        catch { }
+                    }
+                }
+            }
+        }
+    }
+    public void DodajMetak(string id,int kolicina)//odaje emtak
+    {
+            for (int i = 0; i < OtkljucaniMetkovi.Count; i++)//provera dal ije andjen metak u uotkljcuani  ii onda mu povecava kolicinu
+            {
+                if (OtkljucaniMetkovi[i].Id == id)
+                {
+                    OtkljucaniMetkovi[i].PovecajBrojMetkova(kolicina);
+                return;
+                }
+            }
+            for (int i = 0; i < metkoviEquipovani.Length; i++)//proverqa dal i je euqipovan metak i inejga dodaje
+            {
+                if (metkoviEquipovani[i] != null)
+                    if (metkoviEquipovani[i].Id == id)
+                    {
+                        metkoviEquipovani[i].PovecajBrojMetkova(kolicina);
+                        MetakUIUpdate();
+                    return;
+                    }
+            }
+            for (int i = 0; i < sviMetkovi.Count; i++)//proverava dali je equipovan emtak i inejga dodaje
+            {
+                if (sviMetkovi[i].Id == id)
+                {
+                    Debug.Log("Najdne u usvi mmetkovima " + id);
+                sviMetkovi[i].POdesiKolicinu(kolicina);
+                     OtkljucaniMetkovi.Add(sviMetkovi[i]);
+                return;
+                }
+            }
+        
 
     }
     public void PromeniMetakIndex()//ovo menja index koji je od equipovanih metkova aktivan
@@ -172,6 +262,19 @@ public class PuskaMenadzer : MonoBehaviour
 
             GameObject novoDugmeInv = Instantiate(dugmeInventoryPrefabPuske, InventoryContentPUske);//spanjije dogme
             novoDugmeInv.GetComponent<DugmeInvPUska>().Podesi(MojePuske[i].id, MojePuske[i].slika,this);//posat6vlja m uslik u iisotale stvari
+        }
+    }
+    public void UpdejtujUIMetkoviInv()
+    {
+        for (int i = 0; i < metkoviInventoryCOncent.transform.childCount; i++)//ixbirse sve sdtara u uinvent0orij uda bi spawnolo nove
+        {
+            Destroy(metkoviInventoryCOncent.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < OtkljucaniMetkovi.Count; i++)//prilazi kroz otkljcane metkove
+        {
+
+            GameObject novoDugmeInv = Instantiate(metkovidugmePrefab, metkoviInventoryCOncent);//spanjije dogme
+            novoDugmeInv.GetComponent<MetakInventory>().Postavi(OtkljucaniMetkovi[i].Slika, OtkljucaniMetkovi[i].UzmiKOolicinu(), OtkljucaniMetkovi[i].Id, this);//posat6vlja m uslik u iisotale stvari
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MetakK : MonoBehaviour//ova kalsa vodi racuna o osnovni mstavrima o oemtku u uinventoriju koliko ga ima itd
+public class MetakK //ova kalsa vodi racuna o osnovni mstavrima o oemtku u uinventoriju koliko ga ima itd
 {
     private int brojMetkova;
     public Sprite Slika;
@@ -23,6 +23,13 @@ public class MetakK : MonoBehaviour//ova kalsa vodi racuna o osnovni mstavrima o
         this.brojMetkova = brojMetkova;
         this.Id =Id;
     }
+    public MetakK()
+    {
+        this.Slika = null;
+        this.MetakObj =null;
+        this.brojMetkova = 0;
+            this.Id = "";
+    }
     public bool MozePucanjeKolicina(int Kolicina)//dali ima dovoljno metkova da pukne to jest da potrosi metkove
     {
         if(this.brojMetkova>=Kolicina)
@@ -42,5 +49,9 @@ public class MetakK : MonoBehaviour//ova kalsa vodi racuna o osnovni mstavrima o
     public string UzmiKOolicinu()//vraca koliko metkova ima kao string
     {
         return this.brojMetkova.ToString();
+    }
+    public void POdesiKolicinu(int Kolicina)
+    {
+        this.brojMetkova = Kolicina;
     }
 }
