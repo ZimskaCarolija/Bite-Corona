@@ -13,6 +13,7 @@ public class PuskaMenadzer : MonoBehaviour
     public GameObject PUskaRoditelj;//ovde se dodaje  puska i ovo je roditelj puske to jest ovaj bojekat
     public PuskaK equipovana;//puska koja je trenutno equipovana
     public bool MozePucanje = true;//dali mzoe da s epuca ovo se koristi zbog ui -a ja da ne bi puska mogal da puca kada je u uui
+    public List<MetkoviUIDeEQuipo> MetkoviUIDeEquip = new List<MetkoviUIDeEQuipo>();//lista u ui intrneotij uonih koji su equipivani
 
     public MetakK []metkoviEquipovani = new MetakK[3];
     public List<MetakK> sviMetkovi = new List<MetakK>();
@@ -142,6 +143,8 @@ public class PuskaMenadzer : MonoBehaviour
         {
             OtkljucaniMetkovi.Add(metkoviEquipovani[i]);
             metkoviEquipovani[i] = null;
+            UpdejtujUIMetkoviInv();
+
         }
         catch { };
     }
@@ -160,6 +163,7 @@ public class PuskaMenadzer : MonoBehaviour
                             metkoviEquipovani[j] = OtkljucaniMetkovi[i];
                             Debug.LogWarning("metka na J " + j + " je " + metkoviEquipovani[j].Id);
                             OtkljucaniMetkovi.Remove(OtkljucaniMetkovi[i]);
+                            MetkoviUIDeEquip[j].Postavi(metkoviEquipovani[j].Slika, metkoviEquipovani[j].UzmiKOolicinu());
                             UpdejtujUIMetkoviInv();
                             return;
                         }

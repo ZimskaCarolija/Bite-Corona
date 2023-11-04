@@ -8,6 +8,8 @@ public class UIMenadzer : MonoBehaviour
     public GameObject Meni;//menia objerakt ui
     public bool MeniAktivan = false;//dal ij  emeni aktivan
     public PuskaMenadzer puskaM;
+    public GameObject PUskeMeni;
+    public GameObject MetkoivMeni;
     void Start()
     {
         
@@ -32,5 +34,15 @@ public class UIMenadzer : MonoBehaviour
             }
 
         }
+    }
+    public void PUske()
+    {
+        PUskeMeni.SetActive(true);
+        MetkoivMeni.SetActive(false);
+    }
+    public void Metkovi()
+    {
+        PUskeMeni.SetActive(false);
+        MetkoivMeni.SetActive(true);
     }
 }
