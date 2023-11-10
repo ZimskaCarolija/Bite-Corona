@@ -34,7 +34,7 @@ public class Metak : MonoBehaviour
         yield return new WaitForSeconds(range);
         Unisit_fja();//poziva fukciju koja unisgfava objaket
     }
-    public void Unisit_fja()//ova funckiaj sapwnuje efekat ii unistava objakrt
+    public virtual void Unisit_fja()//ova funckiaj sapwnuje efekat ii unistava objakrt
     {
          GameObject pom = Instantiate(Efekat);
         pom.transform.position = this.transform.position;
@@ -44,10 +44,22 @@ public class Metak : MonoBehaviour
     {
         if(collision.gameObject.tag == "Neprijatelj")
         {
-            collision.gameObject.GetComponent<NeprijateljHP>().Udari(prenos);
-            Unisit_fja();
+            UdarioNepriajtelja(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Mapa")
+        {
+            UdarioMapu(collision.gameObject);
         }
 
+    }
+    public virtual void UdarioNepriajtelja(GameObject obj)
+    {
+        obj.GetComponent<NeprijateljHP>().Udari(prenos);
+        Unisit_fja();
+    }
+    public virtual void UdarioMapu(GameObject obj)
+    {
+        Unisit_fja();
     }
 
 }

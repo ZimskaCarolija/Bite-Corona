@@ -19,7 +19,7 @@ public class UIMenadzer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+       /* if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(MeniAktivan)
             {
@@ -35,7 +35,37 @@ public class UIMenadzer : MonoBehaviour
                 puskaM.UpdejtujUIMetkoviInv();
             }
 
+        }*/
+    }
+    public void AktivirajDeaktiviraj()
+    {
+        if (MeniAktivan)
+        {
+            Meni.SetActive(false);
+            MeniAktivan = false;
+            puskaM.MozePucanje = true;
         }
+        else
+        {
+            Meni.SetActive(true);
+            MeniAktivan = true;
+            puskaM.MozePucanje = false;
+            puskaM.UpdejtujUIMetkoviInv();
+        }
+    }
+    public void AktivirajMeni()
+    {
+
+             Meni.SetActive(true);
+        MeniAktivan = true;
+        puskaM.MozePucanje = false;
+        puskaM.UpdejtujUIMetkoviInv();
+    }
+    public void DeaktivirajMeni()
+    {
+        Meni.SetActive(false);
+        MeniAktivan = false;
+        puskaM.MozePucanje = true;
     }
     public void PUske()
     {

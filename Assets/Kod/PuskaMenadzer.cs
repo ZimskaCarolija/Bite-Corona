@@ -70,15 +70,15 @@ public class PuskaMenadzer : MonoBehaviour
     }
     public void PopuniMetkove()
     {
-        MetakK obican = new MetakK(metakObvicanSlika, metakBase, "obican",50);
+        MetakK obican = new MetakK(metakObvicanSlika, metakBase, "obican",10,10);
         sviMetkovi.Add(obican);
-        MetakK pierce = new MetakK(metakPIerceSlika, metakPierce, "pierce",10);
+        MetakK pierce = new MetakK(metakPIerceSlika, metakPierce, "pierce",25,10);
         sviMetkovi.Add(pierce);
-        MetakK vatreni = new MetakK(metakFireSLika, metakFire, "fire",10);
+        MetakK vatreni = new MetakK(metakFireSLika, metakFire, "fire",30,10);
         sviMetkovi.Add(vatreni);
-        MetakK otrovni = new MetakK(metakOtrovSlika, metakOtrov, "otrov", 10);
+        MetakK otrovni = new MetakK(metakOtrovSlika, metakOtrov, "otrov", 30,10);
         sviMetkovi.Add(otrovni);
-        MetakK elektricni = new MetakK(metakElektricniSlika, metakElektricni, "elektricni", 10);
+        MetakK elektricni = new MetakK(metakElektricniSlika, metakElektricni, "elektricni", 30,10);
         sviMetkovi.Add(elektricni);
 
      
@@ -154,6 +154,7 @@ public class PuskaMenadzer : MonoBehaviour
                             OtkljucaniMetkovi.Remove(OtkljucaniMetkovi[i]);
                             MetkoviUIDeEquip[j].Postavi(metkoviEquipovani[j].Slika, metkoviEquipovani[j].UzmiKOolicinu());
                             UpdejtujUIMetkoviInv();
+                            MetakUIUpdate();
                             return;
                         }
                         catch { }

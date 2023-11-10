@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MetakK //ova kalsa vodi racuna o osnovni mstavrima o oemtku u uinventoriju koliko ga ima itd
@@ -8,20 +9,23 @@ public class MetakK //ova kalsa vodi racuna o osnovni mstavrima o oemtku u uinve
     public Sprite Slika;
     public GameObject MetakObj;
     public string Id;//po ovome pronazli metkau u inv
+    public int cena;
 
-    public MetakK(Sprite Slika,GameObject MetakObj,string Id)
+    public MetakK(Sprite Slika,GameObject MetakObj,string Id,int cena)
     {
         this.Slika = Slika;
        this.MetakObj = MetakObj;
         this.brojMetkova  = 0;
         this.Id = Id;
+        this.cena = cena;
     }
-    public MetakK(Sprite Slika, GameObject MetakObj, string Id,int brojMetkova)
+    public MetakK(Sprite Slika, GameObject MetakObj, string Id,int cena,int brojMetkova)
     {
         this.Slika = Slika;
         this.MetakObj = MetakObj;
         this.brojMetkova = brojMetkova;
-        this.Id =Id;
+        this.Id = Id;
+         this.cena = cena;
     }
     public MetakK()
     {
