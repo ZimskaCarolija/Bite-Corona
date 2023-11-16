@@ -23627,6 +23627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nepriajtelj: {fileID: 1552560712}
+  Nadjen: 0
 --- !u!61 &1557188742
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30610,6 +30611,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c6c32f04e89674fac28912a8b21c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puska: {fileID: 1905895310}
+  DMG: 20
+  Brzina: 7
+  Range: 2
+  Coldown: 2
+  MozePucanje: 1
+  DoPucanja: 0
+  nadjen: {fileID: 1557188741}
+  Metak: {fileID: 1702141733134694441, guid: 4a1d279334a9e2e4d9637714a884d759, type: 3}
 --- !u!1001 &1908136409
 PrefabInstance:
   m_ObjectHideFlags: 0

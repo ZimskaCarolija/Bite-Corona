@@ -6,6 +6,7 @@ public class IgracNadjen : MonoBehaviour
 {
     // Start is called before the first frame update
     public NepriajteljPratiIgraca nepriajtelj;
+    public bool Nadjen = false;
     void Start()
     {
         
@@ -19,6 +20,9 @@ public class IgracNadjen : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Igrac")
+        {
             nepriajtelj.PronadjenFja();
+            Nadjen = true;
+        }
     }
 }
