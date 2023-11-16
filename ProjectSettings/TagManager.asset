@@ -10,6 +10,7 @@ TagManager:
   - Mapa
   - Voda
   - Foliage
+  - Nav
   layers:
   - Default
   - TransparentFX

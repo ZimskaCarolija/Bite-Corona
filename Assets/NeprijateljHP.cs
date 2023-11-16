@@ -180,4 +180,11 @@ public class NeprijateljHP : MonoBehaviour
     {
         UIBar1.fillAmount = TenutniHP / MAxHp;
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.GetComponent<IgracHP>())
+        {
+            collision.GetComponent<IgracHP>().Udaren(5);
+        }
+    }
 }

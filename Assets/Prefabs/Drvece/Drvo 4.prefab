@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4423463397286619631}
   - component: {fileID: 6282237987757303249}
   - component: {fileID: 7033864947749448298}
+  - component: {fileID: 865629611707258577}
   m_Layer: 6
   m_Name: Drvo 4
   m_TagString: Mapa
@@ -228,3 +229,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.8462968, y: 2.1812396}
   m_EdgeRadius: 0
+--- !u!114 &865629611707258577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206986567511003802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
