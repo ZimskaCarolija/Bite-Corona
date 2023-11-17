@@ -15,6 +15,8 @@ public class PUcanjeNeprjatelj : MonoBehaviour
     public float DoPucanja = 0;
     public IgracNadjen nadjen;
     public GameObject Metak;
+    public GameObject efekat;
+    public float trajanjeEfekta;
     void Start()
     {
         
@@ -27,23 +29,32 @@ public class PUcanjeNeprjatelj : MonoBehaviour
     }
     public void DoPUcanjaFja(float delta)
     {
-        if(MozePucanje && nadjen.Nadjen)
+        if (nadjen == null || nadjen.Nadjen)
+        if (MozePucanje)
         {
             DoPucanja += delta;
             if(DoPucanja>=Coldown)
             {
-                Pucanj();
-                DoPucanja = 0;
+                    DoPucanja = 0;
+                    Pucanj();
+                
+                efekat.SetActive(true);
+                StartCoroutine(KrajEfekta());
             }
         }
     }
-    public void Pucanj()
+    public  virtual void Pucanj()
     {
         GameObject pom = Instantiate(Metak);
         pom.GetComponent<Rigidbody2D>().velocity = puska.right * Brzina;
         pom.transform.position = transform.position;
         pom.transform.rotation = transform.rotation;
         pom.GetComponent<MetakNeprijatelj>().POstavi(DMG, Range);
+    }
+    IEnumerator KrajEfekta()
+    {
+        yield return new WaitForSeconds(trajanjeEfekta);
+        efekat.SetActive(false);
     }
 
 

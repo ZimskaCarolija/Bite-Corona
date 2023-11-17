@@ -11,6 +11,12 @@ public class IgracHP : MonoBehaviour
     public Image hpSLika;
     public bool MozeUdaren = true;//dal imoze igrac da bude udaren
     public ParticleSystem UdarenPart;//efekat kad primi dmg
+
+
+    [Header("Sok")]
+    public float BaseKolicina;
+    public int NivoSoka;
+    public float PONIvou;
     void Start()
     {
         
@@ -52,5 +58,17 @@ public class IgracHP : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         MozeUdaren = true;
+    }
+    public void HealujSokom()
+    {
+        float kolicina = BaseKolicina + (NivoSoka * PONIvou);
+        healuj(kolicina);
+    }
+    public void healuj(float Kolicina)
+    {
+        TrenutniHP += Kolicina;
+        if(TrenutniHP>MaxHp)
+            TrenutniHP = MaxHp;
+        UpdejtujBasr();
     }
 }
