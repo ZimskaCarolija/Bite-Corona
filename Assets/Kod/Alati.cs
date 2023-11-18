@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Alati : MonoBehaviour
@@ -8,11 +9,16 @@ public class Alati : MonoBehaviour
     public List<Item> SviItemi = new List<Item>();
     public List<Item> Inventori = new List<Item>();
 
-    public MetakInventory[] metakUIAktivni = new MetakInventory[3];
+    public UIINventoriPOlje[] metakUIAktivni = new UIINventoriPOlje[3];
     public Item[] ItemiAktivni = new Item[3];
     public ItemSokParadajz SokParadajz;
 
+    [Header("UIStvari")]
+    public GameObject uiPrefabUnventori;
+    public Transform contentInventori;
 
+    public UIINventoriPOlje polje1;
+    public UIINventoriPOlje polje2;
     //Slike
     [Header("UISlike")]
     public Sprite BiljkaTurrentSlika;
@@ -25,13 +31,14 @@ public class Alati : MonoBehaviour
     public IgracHP hp;
     void Start()
     {
-        SokParadajz = new ItemSokParadajz("SokParadajz", SokOdParadajzaSlika, 1, 10, hp);
+        SokParadajz = new ItemSokParadajz("SokParadajz", SokOdParadajzaSlika, 3, 10, hp);
         ItemiAktivni[0] = SokParadajz;
         ItemiAktivni[1] = null;
         ItemiAktivni[2] = null;
         PopuniSve();
         Dodaj("BijklaTurrent");
-        Equipuj("BijklaTurrent");
+        UpdejtujAktivanMeni();
+       // Equipuj("BijklaTurrent");
     }
 
     // Update is called once per frame
@@ -53,6 +60,7 @@ public class Alati : MonoBehaviour
             if (ItemiAktivni[i].id == zaDodavanje)
             {
                 ItemiAktivni[i].kolicina++;
+                 UpdejtujAktivanMeni();
                 return;
             }
         }
@@ -61,6 +69,8 @@ public class Alati : MonoBehaviour
             if (Inventori[i].id == zaDodavanje)
             {
                 Inventori[i].kolicina++;
+                InventoryUpdejtAlati(); 
+
                 return;
             }
         }
@@ -68,6 +78,7 @@ public class Alati : MonoBehaviour
             if (SviItemi[i].id == zaDodavanje)
             {
                 Inventori.Add(SviItemi[i]);
+                InventoryUpdejtAlati();
                 return;
             }
         }
@@ -82,13 +93,16 @@ public class Alati : MonoBehaviour
                 {
                     ItemiAktivni[1] = Inventori[i];
                     Inventori.RemoveAt(i);
-                   
+                    UpdejtujAktivanMeni();
+                    InventoryUpdejtAlati();
                     return;
                 }
                 else if (ItemiAktivni[2] == null)
                 {
                     ItemiAktivni[2] = Inventori[i];
                     Inventori.RemoveAt(i);
+                    UpdejtujAktivanMeni();
+                    InventoryUpdejtAlati();
                     return;
                 }
             }
@@ -101,6 +115,7 @@ public class Alati : MonoBehaviour
             if (ItemiAktivni[0].ProveriKolicnu())
             {
                 ItemiAktivni[0].Iskoristi(transform);
+                UpdejtujAktivanMeni();
             }
         }
         if(Input.GetKeyDown(KeyCode.Alpha1) && ItemiAktivni[1]!=null)
@@ -108,7 +123,72 @@ public class Alati : MonoBehaviour
             if (ItemiAktivni[1].ProveriKolicnu())
             {
                 ItemiAktivni[1].Iskoristi(transform);
+                UpdejtujAktivanMeni();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && ItemiAktivni[2] != null)
+        {
+            if (ItemiAktivni[2].ProveriKolicnu())
+            {
+                ItemiAktivni[2].Iskoristi(transform);
+                UpdejtujAktivanMeni();
+            }
+        }
+    }
+    public void UpdejtujAktivanMeni()
+    {
+        for(int i=0;i<ItemiAktivni.Length;i++)
+        {
+            if (ItemiAktivni[i] != null)
+            {
+                metakUIAktivni[i].Postavi(ItemiAktivni[i].slika, ItemiAktivni[i].kolicina.ToString(), ItemiAktivni[i].id, this);
+            }
+            else
+                metakUIAktivni[i].Isprazni();
+        }
+    }
+
+
+    public void InventoryUpdejtAlati()//updejtuje inv zsa puskama koje je igrac otkljucao
+    {
+
+        for (int i = 0; i < contentInventori.transform.childCount; i++)//ixbirse sve sdtara u uinvent0orij uda bi spawnolo nove
+        {
+            Destroy(contentInventori.transform.GetChild(i).gameObject);
+        }
+        for (int i = 0; i < Inventori.Count; i++)//prilazi kroz otkljcane psuke
+        {
+
+            GameObject novoDugmeInv = Instantiate(uiPrefabUnventori, contentInventori);//spanjije dogme
+            novoDugmeInv.GetComponent<UIINventoriPOlje>().Postavi(Inventori[i].slika, Inventori[i].kolicina.ToString(), Inventori[i].id,this);//posat6vlja m uslik u iisotale stvari
+        }
+        UpdejtujINvenoriAktivne();
+    }
+    public void UpdejtujINvenoriAktivne()
+    {
+        if (ItemiAktivni[1] != null)
+        {
+            polje1.Postavi(ItemiAktivni[1].slika, ItemiAktivni[1].kolicina.ToString(), ItemiAktivni[1].id, this);
+        }
+        else
+            polje1.Isprazni();
+
+        if (ItemiAktivni[2] != null)
+        {
+            polje2.Postavi(ItemiAktivni[2].slika, ItemiAktivni[2].kolicina.ToString(), ItemiAktivni[2].id, this);
+        }
+        else
+            polje2.Isprazni();
+    }
+    public void DeEquipuj(int i)
+    {
+        if (ItemiAktivni[i]!=null)
+        {
+            Item a = ItemiAktivni[i];
+            Inventori.Add(a);
+            ItemiAktivni[i] = null;
+            InventoryUpdejtAlati();
+
         }
     }
 }

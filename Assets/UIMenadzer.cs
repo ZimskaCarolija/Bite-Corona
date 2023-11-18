@@ -10,7 +10,8 @@ public class UIMenadzer : MonoBehaviour
     public PuskaMenadzer puskaM;
     public GameObject PUskeMeni;
     public GameObject MetkoivMeni;
-
+    public GameObject AlatiMeni;
+    public Alati alati;
     void Start()
     {
         
@@ -44,6 +45,7 @@ public class UIMenadzer : MonoBehaviour
             Meni.SetActive(false);
             MeniAktivan = false;
             puskaM.MozePucanje = true;
+
         }
         else
         {
@@ -51,6 +53,7 @@ public class UIMenadzer : MonoBehaviour
             MeniAktivan = true;
             puskaM.MozePucanje = false;
             puskaM.UpdejtujUIMetkoviInv();
+            alati.InventoryUpdejtAlati();
         }
     }
     public void AktivirajMeni()
@@ -71,11 +74,18 @@ public class UIMenadzer : MonoBehaviour
     {
         PUskeMeni.SetActive(true);
         MetkoivMeni.SetActive(false);
+        AlatiMeni.SetActive(false);
     }
     public void Metkovi()
     {
         PUskeMeni.SetActive(false);
         MetkoivMeni.SetActive(true);
-        
+        AlatiMeni.SetActive(false);
+    }
+    public void Alati()
+    {
+        PUskeMeni.SetActive(false);
+        MetkoivMeni.SetActive(false);
+        AlatiMeni.SetActive(true);
     }
 }
