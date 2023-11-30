@@ -23,8 +23,22 @@ public class Metak : MonoBehaviour
     {
         
     }
-    public void Podesi(float Range,float Mnozilac)//u ovoj funckiji postavlja speciifcne stvari za pusku
+    public void Podesi(float Range,float Mnozilac,Boostovi boost)//u ovoj funckiji postavlja speciifcne stvari za pusku
     {
+        if (boost == null)
+            Debug.LogWarning("Boost je null");
+
+        if (boost.Ima_Vatru())
+            Vatra = true;
+        if(boost.Ima_Otrov())
+            Otrov = true;
+        if (boost.Ima_Struju())
+            Struja = true;
+        if(boost.Ima_LifeSteal())
+            LifeSteal = true;
+
+
+
         prenos = new DMGPrenos(DMGMetka, Vatra, Otrov, Struja, LifeSteal, ProcenatLifeSteala);//pravi objekqat z aprenos dmg
          prenos.IzracunaDMG(Mnozilac);//izracunava ukupan dmg po puski
         StartCoroutine(Unisti_Vrme(Range));//zoive vremsnk u funkih koja unistava objekat po rang4eu

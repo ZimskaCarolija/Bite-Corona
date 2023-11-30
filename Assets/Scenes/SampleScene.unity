@@ -838,10 +838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12a4b1df732533498f75de15bb2c9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SvePuske: []
-  MojePuske: []
-  PUskaRoditelj: {fileID: 0}
-  equipovana: {fileID: 0}
   MozePucanje: 1
   MetkoviUIDeEquip:
   - {fileID: 8238297750968401615}

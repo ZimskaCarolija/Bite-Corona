@@ -46,7 +46,7 @@ public class PuskaRafalBase : MonoBehaviour
                 pom.transform.position = poziciajSpawnovanjeMetka.transform.position;//postavlja poziciju metku na mesto spawnivane metka
                 pom.GetComponent<Rigidbody2D>().velocity = transform.right * JacinaMetka;
                 pom.transform.rotation = transform.rotation;
-                pom.GetComponent<Metak>().Podesi(Range, MnozilacDMG);
+                pom.GetComponent<Metak>().Podesi(Range, MnozilacDMG,puskaM.boost);
             }
         }
        catch { };

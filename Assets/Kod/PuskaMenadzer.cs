@@ -10,7 +10,7 @@ public class PuskaMenadzer : MonoBehaviour
     // Start is called before the first frame update
     public List<PuskaK> SvePuske = new List<PuskaK>();//lista koja sadzrzi bas sve puske
     public List<PuskaK>MojePuske = new List<PuskaK> ();//lista pusaka kojeje igrac otkljucao inventori
-    public GameObject PUskaRoditelj;//ovde se dodaje  puska i ovo je roditelj puske to jest ovaj bojekat
+    //public GameObject PUskaRoditelj;//ovde se dodaje  puska i ovo je roditelj puske to jest ovaj bojekat
     public PuskaK equipovana;//puska koja je trenutno equipovana
     public bool MozePucanje = true;//dali mzoe da s epuca ovo se koristi zbog ui -a ja da ne bi puska mogal da puca kada je u uui
     public List<MetkoviUIDeEQuipo> MetkoviUIDeEquip = new List<MetkoviUIDeEQuipo>();//lista u ui intrneotij uonih koji su equipivani
@@ -53,11 +53,20 @@ public class PuskaMenadzer : MonoBehaviour
     public Sprite metakFireSLika;
     public Sprite metakOtrovSlika;
     public Sprite metakElektricniSlika;
+
+    public Boostovi boost ;
+    private void Awake()
+    {
+        boost = new Boostovi();
+    }
     void Start()
     {
-        PUskaRoditelj = this.gameObject;
+        if (boost == null)
+            Debug.LogWarning("Boost je null");
+        //boost = new Boostovi();
+       // PUskaRoditelj = this.gameObject;
         PopuniPuske();
-        OtkljucajPUska("ak");
+       OtkljucajPUska("ak");
         OtkljucajPUska("revolver");
         EquipujPUsku("ak");
         PopuniMetkove();
@@ -100,6 +109,7 @@ public class PuskaMenadzer : MonoBehaviour
     }
     public void PopuniPuske()
     {
+        SvePuske = new List<PuskaK>();
         PuskaK reovlver = new PuskaK("revolver",RevolverObj,RevolverSlika);
         SvePuske.Add(reovlver);
         PuskaK ak = new PuskaK("ak", AkObj, AkSlika);
@@ -108,6 +118,8 @@ public class PuskaMenadzer : MonoBehaviour
     }
     public void OtkljucajPUska(string id)//dodaje pusku  u invcentory prima id ii po to midju nalazi pusku
     {
+        if (SvePuske.Count == 0)
+            return;
         PuskaK pom = SvePuske[0];
         foreach(PuskaK puskaK in SvePuske)
         {
@@ -232,13 +244,13 @@ public class PuskaMenadzer : MonoBehaviour
             {
                 equipovana = puska;
                 uiZaPusku.sprite = equipovana.slika;
-               for(int i=0;i<PUskaRoditelj.transform.childCount;i++)//proclazi kroz svu decu objekat
+               for(int i=0;i<this.transform.childCount;i++)//proclazi kroz svu decu objekat
                 {
-                    Destroy(PUskaRoditelj.transform.GetChild(i).gameObject);//unistava decu
+                    Destroy(this.transform.GetChild(i).gameObject);//unistava decu
                 }
                 GameObject pom = Instantiate(equipovana.objekat);//spawnuje pusku
-                pom.transform.position = PUskaRoditelj.transform.position;//postavlja poziciju puske na roditeljki objekat
-                pom.transform.parent = PUskaRoditelj.transform;//postavalja roditelja puske koja se sad spavnibvala
+                pom.transform.position = this.transform.position;//postavlja poziciju puske na roditeljki objekat
+                pom.transform.parent = this.transform;//postavalja roditelja puske koja se sad spavnibvala
                
                 pom.GetComponent<PuskaRafalBase>().SpremnoPucanje = true;//postavja da moze da s epuska puca  i puskarafalbase je glavna klasa za puske iz koje ostale ansledjuju
                 pom.GetComponent<PuskaRafalBase>().puskaM = this;//dodavanj puske menadzera puski

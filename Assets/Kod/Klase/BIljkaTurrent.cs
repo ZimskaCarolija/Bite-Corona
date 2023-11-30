@@ -8,10 +8,13 @@ public class BIljkaTurrent : PUcanjeNeprjatelj
     public List<Transform> mete;
     public NeprijateljPUskaKod puskaKod;
     public float Trajanje;
+    public Boostovi boost;
     void Start()
     {
+        boost = GameObject.FindGameObjectWithTag("Puske").GetComponent<PuskaMenadzer>().boost;
         List<Transform> mete = new List<Transform>();
         StartCoroutine(Unisti());
+     
     }
 
     // Update is called once per frame
@@ -27,7 +30,7 @@ public class BIljkaTurrent : PUcanjeNeprjatelj
         pom.GetComponent<Rigidbody2D>().velocity = puska.right * Brzina;
         pom.transform.position = transform.position;
         pom.transform.rotation = transform.rotation;
-        pom.GetComponent<Metak>().Podesi(Range,DMG);
+        pom.GetComponent<Metak>().Podesi(Range,DMG,boost);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
