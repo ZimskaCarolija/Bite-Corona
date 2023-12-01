@@ -8148,6 +8148,7 @@ MonoBehaviour:
   - {fileID: 5925088084371152542}
   - {fileID: 573553519}
   - {fileID: 904568338}
+  puskaM: {fileID: 84748933}
   uiPrefabUnventori: {fileID: 3403498539940217421, guid: d95904de464a0b04b9cdb1163a334d16, type: 3}
   contentInventori: {fileID: 2059790930}
   polje1: {fileID: 1532087283}
@@ -8159,6 +8160,9 @@ MonoBehaviour:
   SokOdParadajzaSlika: {fileID: 21300000, guid: e8214ec0ca361bc46bd25c9b8fc96c41, type: 3}
   SpawnTurrent: {fileID: 7686147475112169311, guid: 792fff61281574948993221d931159b1, type: 3}
   hp: {fileID: 491975946}
+  SIbiceEfekat: {fileID: 6168763256050208393, guid: da5d4d70827e6524791015db19921096, type: 3}
+  baterijaEfekat: {fileID: 8393296671713814481, guid: 549a1d445de23a643ac216fd23458fd3, type: 3}
+  SpawnovanjeBomba: {fileID: 3676939759640907858, guid: 6aecd6548df2be84fafa41857ec05ceb, type: 3}
 --- !u!1001 &503066732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11047,6 +11051,7 @@ GameObject:
   - component: {fileID: 787959240}
   - component: {fileID: 787959239}
   - component: {fileID: 787959238}
+  - component: {fileID: 787959241}
   m_Layer: 0
   m_Name: KOmpjuterMeni
   m_TagString: Mapa
@@ -11168,6 +11173,22 @@ Transform:
   - {fileID: 658173115}
   m_Father: {fileID: 1968438552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &787959241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787959235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!4 &798890723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8579224161744528206, guid: dda4026d8069d4942b49e1e6a5a76680, type: 3}
@@ -40499,7 +40520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
       propertyPath: CollisionModule.collisionMessages
@@ -40515,7 +40536,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
       propertyPath: InitialModule.startSpeed.minScalar
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
@@ -40532,6 +40553,14 @@ PrefabInstance:
     - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
       propertyPath: CollisionModule.m_Planes.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953132497149669112, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4948385090101581307, guid: d9ce5f0166ca0794aa1ded719f62affa, type: 3}
       propertyPath: m_LocalPosition.x

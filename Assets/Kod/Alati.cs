@@ -12,7 +12,7 @@ public class Alati : MonoBehaviour
     public UIINventoriPOlje[] metakUIAktivni = new UIINventoriPOlje[3];
     public Item[] ItemiAktivni = new Item[3];
     public ItemSokParadajz SokParadajz;
-
+    public PuskaMenadzer puskaM;
     [Header("UIStvari")]
     public GameObject uiPrefabUnventori;
     public Transform contentInventori;
@@ -29,6 +29,9 @@ public class Alati : MonoBehaviour
     [Header("Za iteme")]
     public GameObject SpawnTurrent;
     public IgracHP hp;
+    public GameObject SIbiceEfekat;
+    public GameObject baterijaEfekat;
+    public GameObject SpawnovanjeBomba;
     void Start()
     {
         SokParadajz = new ItemSokParadajz("SokParadajz", SokOdParadajzaSlika, 3, 10, hp);
@@ -37,6 +40,13 @@ public class Alati : MonoBehaviour
         ItemiAktivni[2] = null;
         PopuniSve();
         Dodaj("BijklaTurrent");
+        Dodaj("Sibice");
+        Dodaj("Sibice");
+        Dodaj("Baterija");
+        Dodaj("Bomba");
+        Dodaj("Bomba");
+        Dodaj("Bomba");
+        Dodaj("Bomba");
         UpdejtujAktivanMeni();
        // Equipuj("BijklaTurrent");
     }
@@ -50,6 +60,15 @@ public class Alati : MonoBehaviour
     {
         ItemBiljkaTurent biljkaTurent = new ItemBiljkaTurent("BijklaTurrent", BiljkaTurrentSlika, 1, 150, SpawnTurrent);
         SviItemi.Add(biljkaTurent);
+
+        ItemSibice sibice = new ItemSibice("Sibice", SibicaSlika, 1, 70, SIbiceEfekat, puskaM); 
+        SviItemi.Add(sibice);
+
+        ItemBaterija baterija = new ItemBaterija("Baterija", BaterijaSlika, 1, 90, baterijaEfekat, puskaM);
+        SviItemi.Add(baterija);
+
+        ItemBomba bomba = new ItemBomba("Bomba", BombaSlika, 1, 120, SpawnovanjeBomba);
+        SviItemi.Add(bomba);
 
     }
     public void Dodaj(string zaDodavanje)
